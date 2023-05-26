@@ -1,19 +1,21 @@
 "use client"
 import Image from "next/image";
 import {useRef, useState, useLayoutEffect, useEffect} from "react";
-import {CSSTransition} from "react-transition-group"
-import {gsap} from "gsap"
+import {CSSTransition, SwitchTransition} from "react-transition-group"
 
 export default function Home() {
   const [window_k, setWindow] = useState(0);
   const [window_ani, setWindowAni] = useState(false);
+
   function closeWindow() {
     setWindowAni(false);
   }
+
   function openWindow(key: number) {
     setWindowAni(true)
     setWindow(key);
   }
+
   const [text, setText] = useState("");
   const window_data = [
     {
@@ -44,20 +46,24 @@ export default function Home() {
   ]
   const windowRef = useRef(null);
 
-  function roll(times:1|10){
+  function roll(times: 1 | 10) {
     setRollCutscene(true);
-    const tl = gsap.timeline();
-    requestAnimationFrame(()=>{
-      tl.from("#roll-card",{y:1000})
-        .to("#roll-card",{y:-100,rotate:720})
-        .to("#roll-card",{scale:2})
-        .then(()=>{
-          setRollCutscene(false);
-        })
-    })
   }
-  const [roll_cutscene,setRollCutscene] = useState(false)
-  
+
+  const [roll_cutscene, setRollCutscene] = useState(false)
+
+  function nextCard() {
+    if(card_k>=6)console.log("没了！")
+    else setCard(card_k + 1);
+  }
+  function nextCardAni(){
+    setCardAni(card_k)
+  }
+
+  const [card_k, setCard] = useState(0);
+  const [card_ani_k, setCardAni] = useState(1);
+  const cardRef = useRef(null)
+
   return (
     <main className={"flex flex-col w-screen h-screen"}>
       <div id={"headline"}>
@@ -90,13 +96,13 @@ export default function Home() {
           <div className={"absolute left-0 right-0 -bottom-3 flex items-center px-6"}>
             <div className={"flex-1"}></div>
             <div className={"px-3"}>
-              <button onClick={()=>roll(1)}>
+              <button onClick={() => roll(1)}>
                 <Image style={{display: "inherit"}} width={50} height={10} src={"/vercel.svg"} alt={"追·卡券"}/>
                 <span>x1 | 抽1次</span>
               </button>
             </div>
             <div className={"px-3"}>
-              <button onClick={()=>roll(10)}>
+              <button onClick={() => roll(10)}>
                 <Image style={{display: "inherit"}} width={50} height={10} src={"/vercel.svg"} alt={"追·卡券"}/>
                 <span>x10 | 抽10次</span>
               </button>
@@ -112,10 +118,11 @@ export default function Home() {
         </div>
       </div>
 
-      <CSSTransition nodeRef={windowRef} in={window_ani} onExited={()=>setWindow(0)} timeout={200} classNames="window">
+      <CSSTransition nodeRef={windowRef} in={window_ani} onExited={() => setWindow(0)} timeout={200}
+                     classNames="window">
         <>{window_k != 0 ? <div ref={windowRef} className={"fixed inset-0 flex items-center justify-center"}>
           <div id={"curtain"} onClick={closeWindow}></div>
-          <div  className={"window flex flex-col"}
+          <div className={"window flex flex-col"}
                style={{width: window_data[window_k].w, height: window_data[window_k].h}}>
             <div className={"window-head flex items-center"}>
               <div className={"flex-1 text-center leading-9 pl-10"}>{window_data[window_k].title}</div>
@@ -128,9 +135,18 @@ export default function Home() {
         </div> : null}</>
       </CSSTransition>
 
-      {roll_cutscene?<div id={"roll"}>
-        <div id={"roll-card"} ></div>
-      </div>:null}
+      {roll_cutscene ? <div id={"roll"}>
+        <div id={"curtain"} onClick={nextCard}></div>
+        <CSSTransition
+          in={card_k == card_ani_k}
+          nodeRef={cardRef}
+          timeout={200}
+          onExited={() => nextCardAni()}
+          classNames="roll-card"
+        >
+          <div id={"roll-card"} ref={cardRef}></div>
+        </CSSTransition>
+      </div> : null}
     </main>
   )
 }

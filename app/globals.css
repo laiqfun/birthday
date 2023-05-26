@@ -218,3 +218,22 @@ body{
     transform: scale(0.9);
     transition: 200ms ease;
 }
+
+.roll-card-enter {
+    opacity: 0;
+    transform: scale(10);
+}
+.roll-card-enter-active  {
+    opacity: 1;
+    transform: scale(1);
+    transition: 200ms ease;
+}
+.roll-card-exit  {
+    opacity: 1;
+    transform: scale(1);
+}
+.roll-card-exit-active  {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: 20ms ease;
+}
