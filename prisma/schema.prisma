@@ -17,6 +17,7 @@ model User {
   nickname String
   password String
   items    ItemRecord[]
+  money    Int          @default(0)
 }
 
 // 物品记录
@@ -39,4 +40,12 @@ model ItemDetail {
   description String
   imageUrl    String
   ItemRecord  ItemRecord[]
+}
+
+// 兑换码
+model cdkey {
+  content String   @id
+  used    Boolean  @default(false)
+  useTime DateTime
+  money   Int
 }
