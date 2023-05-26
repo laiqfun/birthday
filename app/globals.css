@@ -2,28 +2,240 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+body{
+    width: 100vw;
+    height: 100vh;
+    background: #eeccb0;
+    overflow: hidden;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+.btn{
+    background: #f2ecde;
+    color: #3d3b4f;
+    font-size: 14px;
+    padding: 0 10px;
+    line-height: 24px;
+    border-radius: 20px;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.input_textarea {
+    resize: none;
+    border: 1px solid #dbdbdb;
+    padding: 10px;
+    box-sizing: border-box;
+    outline: none;
+    border-radius: 5px;
+    transition: .1s ease;
+}
+
+.input_textarea:focus,.input:focus {
+    border-color: #ffb101;
+    background-color: #fbfbfb !important;
+    box-shadow: 0 0 0 1px #ffb101;
+}
+.input_textarea:hover,.input:hover {
+    background-color: #f3f3f3;
+}
+
+.input {
+    font-size: 15px;
+    border: 1px solid #dbdbdb;
+    padding: 0 10px;
+    line-height: 36px;
+    height: 36px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    outline: none;
+    transition: .1s ease;
+}
+
+/* button */
+.button {
+    margin: 0;
+    line-height: 36px;
+    font-size: 15px;
+    font-family: inherit;
+    padding: 0 10px;
+    height: 36px;
+    background: none;
+    border-radius: 5px;
+    color: #fff;
+    background: #ffb101;
+    white-space: nowrap;
+    outline: none;
+    border: 1px solid #ffffff00;
+    user-select: none;
+    -webkit-user-select: none;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    transition: .1s ease;
+    position: relative;
+}
+
+.button:hover {
+    background-color: rgba(255, 177, 1, 0.82);
+}
+
+.button:active {
+    background-color: rgba(255, 177, 1, 0.52);
+}
+
+.button:focus {
+    border-color: inherit;
+}
+
+#headline{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 30vw;
+    min-width: 150px;
+    padding-left: 16px;
+    word-break: keep-all;
+}
+#headline h1{
+    line-height: 56px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#ticket{
+    font-size: 12px;
+    line-height: 24px;
+    border-radius: 20px;
+    background: rgba(59, 72, 79, 0.69);
+    display: flex;
+    color: #f2ecde;
+}
+#ticket div{
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    position: relative;
+    background: #3d3b4f;
+}
+#ticket span{
+    text-align: right;
+    flex-grow: 1;
+    width: 24px;
+}
+#ticket button{
+    width: 20px;
+}
+
+#banner{
+    background: #ff7728;
+    width: 720px;
+    height: 400px;
+    border-radius: 10px;
+    position: relative;
+}
+@media screen and (max-width: 720px) {
+    #banner{
+        width: 90vw;
+        height: 480px;
+    }
+}
+#banner-hero{
+    right: 0;
+    top: 20%;
+}
+#banner-hero img{
+    transform: rotate(50deg);
+}
+#banner button{
+    background: #f2ecde;
+    color: #3d3b4f;
+    font-size: 14px;
+    padding: 0 16px;
+    line-height: 36px;
+    border-radius: 30px;
+}
+#roll{
+    position: fixed;
+    inset: 0;
+    z-index: 666;
+    background: #ffffff;
+    overflow: hidden;
+}
+#roll-card{
+    position: absolute;
+    height: 160px;
+    width: 120px;
+    background-color: #ff7728;
+    border-radius: 5px;
+    top: 50%;
+    left: 50%;
+    margin-left: -60px;
+}
+
+#curtain{
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: rgba(51, 51, 51, 0.42);
+}
+.window{
+    background: #f2ecde;
+    border-radius: 10px;
+}
+.window-head{
+    background: #ffb101;
+    border-radius: 10px 10px 0 0;
+}
+
+.window-enter #curtain {
+    opacity: 0;
+}
+.window-enter-active #curtain {
+    opacity: 1;
+    transition: opacity 200ms ease;
+}
+.window-exit #curtain {
+    opacity: 1;
+}
+.window-exit-active #curtain {
+    opacity: 0;
+    transition: opacity 200ms ease;
+}
+.window-enter .window {
+    opacity: 0;
+    transform: scale(0.5);
+}
+.window-enter-active .window {
+    opacity: 1;
+    transform: scale(1);
+    transition: 200ms ease;
+}
+.window-exit .window {
+    opacity: 1;
+    transform: scale(1);
+}
+.window-exit-active .window {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: 200ms ease;
+}
+
+.roll-card-enter {
+    opacity: 0;
+    transform: scale(10);
+}
+.roll-card-enter-active  {
+    opacity: 1;
+    transform: scale(1);
+    transition: 200ms ease;
+}
+.roll-card-exit  {
+    opacity: 1;
+    transform: scale(1);
+}
+.roll-card-exit-active  {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: 20ms ease;
 }
 html {
   height: 100vh;
