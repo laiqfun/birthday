@@ -68,15 +68,13 @@ export default function Dialog({
       <div
         onClick={(ev) => ev.stopPropagation()}
         ref={containerRef}
-        className="
+        className={`
       flex flex-col
-      w-96
-      h-48
-      max-w-lg
       bg-white
+      min-w-[20rem]
       rounded-lg
       shadow-lg
-      "
+      `}
       >
         <div className="p-2 flex items-center">
           <span className="flex-1">{title}</span>

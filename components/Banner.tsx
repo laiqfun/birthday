@@ -36,7 +36,7 @@ export default function Banner() {
   }, []);
   return (
     <div
-      className="w-full md:max-w-3xl h-96 md:mx-12  max-w-full mx-0 relative bg-cover rounded-md shadow-md opacity-0"
+      className="w-5/6 md:max-w-3xl h-96 md:mx-12  max-w-full mx-0 relative bg-cover rounded-md shadow-md opacity-0"
       style={{ backgroundImage: `url('${backgroundImage.src}')` }}
       ref={rootRef}
     >
@@ -47,7 +47,7 @@ export default function Banner() {
       </div>
       <div
         className={
-          "absolute -right-6 bottom-0 translate-y-5 flex items-center flex-col sm:flex-row w-full sm:w-auto"
+          "absolute -left-6 sm:left-auto -right-6 bottom-0 translate-y-5 flex items-center"
         }
         ref={buttonGroupRef}
       >
