@@ -13,7 +13,8 @@ export default function Button({
     <button
       className="
       p-1 px-5 m-1 
-      
+      w-full sm:w-auto
+      flex justify-center items-center
       shadow 
       border-transparent border-2 rounded-full
       align-middle text-sm

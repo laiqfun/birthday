@@ -15,6 +15,7 @@ export default function Dialog({
     onClose();
   },
   buttons = ["取消"],
+  disableButtons = false,
 }: {
   isShow: boolean;
   backdropCloseable?: boolean;
@@ -23,6 +24,7 @@ export default function Dialog({
   title?: string;
   onButtonClick?(index: number): unknown;
   buttons?: String[];
+  disableButtons?: boolean;
 }) {
   const rootRef = createRef<HTMLDivElement>();
   const containerRef = createRef<HTMLDivElement>();
@@ -81,6 +83,7 @@ export default function Dialog({
           <Image
             src={closeButton.src}
             width={20}
+            className="cursor-pointer hover:hue-rotate-30"
             alt={"关闭"}
             height={20}
             onClick={onClose}
@@ -89,7 +92,11 @@ export default function Dialog({
         <div className="flex-1 p-4">{children}</div>
         <div className="bg-gray-300 w-full h-12 items-center flex justify-center rounded-br-lg">
           {buttons.map((v, i) => (
-            <Button key={i} onClick={() => onButtonClick(i)}>
+            <Button
+              key={i}
+              onClick={() => onButtonClick(i)}
+              disabled={disableButtons}
+            >
               {v}
             </Button>
           ))}

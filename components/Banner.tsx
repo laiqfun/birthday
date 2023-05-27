@@ -36,7 +36,7 @@ export default function Banner() {
   }, []);
   return (
     <div
-      className="w-full h-96 mx-12 relative bg-cover rounded-md shadow-md max-w-3xl opacity-0"
+      className="w-full md:max-w-3xl h-96 md:mx-12  max-w-full mx-0 relative bg-cover rounded-md shadow-md opacity-0"
       style={{ backgroundImage: `url('${backgroundImage.src}')` }}
       ref={rootRef}
     >
@@ -47,15 +47,15 @@ export default function Banner() {
       </div>
       <div
         className={
-          "absolute right-0 bottom-0 translate-y-5 flex items-center px-6"
+          "absolute right-0 bottom-0 translate-y-5 flex items-center px-6 flex-col sm:flex-row w-full sm:w-auto"
         }
         ref={buttonGroupRef}
       >
         <div className={"flex-1"}></div>
-        <div className={"px-3"}>
+        <div className={"px-3 sm:w-auto w-full flex"}>
           <Button onClick={() => roll(1)} disabled={buttonDisabled}>
             <Image
-              style={{ display: "inherit" }}
+              className="inline"
               height={30}
               width={30}
               src={ticketImage.src}
@@ -64,10 +64,10 @@ export default function Banner() {
             <span>x1 | 抽1次</span>
           </Button>
         </div>
-        <div className={"px-3"}>
+        <div className={"px-3 sm:w-auto w-full flex"}>
           <Button onClick={() => roll(10)} disabled={buttonDisabled}>
             <Image
-              style={{ display: "inherit" }}
+              className="inline"
               height={30}
               width={30}
               src={ticketImage.src}

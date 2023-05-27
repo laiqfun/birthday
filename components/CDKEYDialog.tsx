@@ -33,25 +33,28 @@ export default function CDKEYDialog({
     setLoading(false);
   }
   return (
-    <Dialog
-      isShow={isShow}
-      onClose={_onClose}
-      title="兑换码"
-      buttons={["使用兑换码", "取消"]}
-      onButtonClick={(i) => {
-        if (i === 0) {
-          applyKey();
-        } else {
-          _onClose();
-        }
-      }}
-    >
-      <Input
-        value={inputValue}
-        onChange={(v) => setInputValue(v)}
-        disabled={loading}
-        hint={errorMessage}
-      ></Input>
+    <>
+      <Dialog
+        isShow={isShow}
+        onClose={_onClose}
+        title="兑换码"
+        buttons={["使用兑换码", "取消"]}
+        onButtonClick={(i) => {
+          if (i === 0) {
+            applyKey();
+          } else {
+            _onClose();
+          }
+        }}
+        disableButtons={loading}
+      >
+        <Input
+          value={inputValue}
+          onChange={(v) => setInputValue(v)}
+          disabled={loading}
+          hint={errorMessage}
+        ></Input>
+      </Dialog>
       <Dialog
         isShow={showSuccessDialog}
         onClose={() => setShowSuccessDialog(false)}
@@ -59,6 +62,6 @@ export default function CDKEYDialog({
       >
         兑换成功
       </Dialog>
-    </Dialog>
+    </>
   );
 }
