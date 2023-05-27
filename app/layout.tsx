@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="zh">
       <body className={HanYiQiHeiFont.className + " flex w-full h-full"}>
         {children}
       </body>
