@@ -3,14 +3,17 @@ import ticketImage from "@/assets/ticket.png";
 import Banner from "@/components/Banner";
 import Button from "@/components/Button";
 import CDKEYDialog from "@/components/CDKEYDialog";
+import { getUserById } from "@/libs/user";
+import { User } from "@prisma/client";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CSSTransition } from "react-transition-group";
 
 export default function Home() {
   const [window_k, setWindow] = useState(0);
   const [window_ani, setWindowAni] = useState(false);
   const [showCDKEYDialog, setShowCDKEYDialog] = useState(false);
+  const [user, setUser] = useState<User>();
 
   function closeWindow() {
     setWindowAni(false);
@@ -100,11 +103,16 @@ export default function Home() {
 
   const [maxStar, setMaxStar] = useState(3);
 
+  useEffect(() => {
+    getUserById(1).then((u) => setUser(u!));
+  }, []);
+
   return (
     <main className={"flex flex-col w-screen h-screen"}>
       <div id={"headline"}>
         <h1>✨生日活动</h1>
         <p>『抽卡的快乐』</p>
+        <p>user:{user && user.nickname}</p>
       </div>
       <div className={"flex items-center h-14 pr-2"}>
         <div className={"flex-1"}></div>

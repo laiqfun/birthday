@@ -1,14 +1,13 @@
 "use server";
 
-import { PrismaClient } from "@prisma/client";
+import { getPrismaClient } from "./db";
 
 export async function applyServerAction(
   key: string
 ): Promise<boolean | string> {
   "use server";
-  await new Promise((r) => setTimeout(r, 1e3)); // 模拟加载
-  const prisma = new PrismaClient();
-  await prisma.$connect();
+  if (!key) return "兑换码无效";
+  const prisma = await getPrismaClient();
   const cdkey = await prisma.cdkey.findFirst({
     where: {
       content: key,
@@ -31,7 +30,6 @@ export async function applyServerAction(
       // await prisma.user.update({})
     }
   } else error = "兑换码无效";
-  prisma.$disconnect();
   if (error) {
     return error;
   } else {

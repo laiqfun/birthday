@@ -35,13 +35,13 @@ export default function Dialog({
         containerRef.current,
         isShow
           ? {
-              scale:1,
+              scale: 1,
               opacity: 1,
               ease: "power4",
               duration: 0.3,
             }
           : {
-              scale:1.2,
+              scale: 1.2,
               opacity: 0,
               ease: "power4",
               duration: 0.3,
@@ -70,11 +70,13 @@ export default function Dialog({
         ref={containerRef}
         className="
       flex flex-col
-      w-96
-      h-48
-      max-w-lg
+      sm:w-96
+      h-52
+      w-full
+      sm:max-w-lg
       bg-white
-      rounded-lg
+      rounded-none
+      sm:rounded-lg
       shadow-lg
       "
       >
