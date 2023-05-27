@@ -1,6 +1,6 @@
 "use client";
-import testImage from "@/assets/testImage.png";
 import ticketImage from "@/assets/ticket.png";
+import Banner from "@/components/Banner";
 import Button from "@/components/Button";
 import Image from "next/image";
 import { useRef, useState } from "react";
@@ -102,49 +102,7 @@ export default function Home() {
         </div>
       </div>
       <div className={"flex-1 flex items-center justify-center"}>
-        <div id={"banner"}>
-          <div>
-            <div id={"banner-hero"} className={"absolute"}>
-              <Image
-                width={100}
-                height={100}
-                src={testImage.src}
-                alt={"五星"}
-              />
-            </div>
-          </div>
-          <div
-            className={
-              "absolute left-0 right-0 -bottom-3 flex items-center px-6"
-            }
-          >
-            <div className={"flex-1"}></div>
-            <div className={"px-3"}>
-              <Button onClick={() => roll(1)}>
-                <Image
-                  style={{ display: "inherit" }}
-                  height={30}
-                  width={30}
-                  src={ticketImage.src}
-                  alt={"追·卡券"}
-                />
-                <span>x1 | 抽1次</span>
-              </Button>
-            </div>
-            <div className={"px-3"}>
-              <Button onClick={() => roll(10)}>
-                <Image
-                  style={{ display: "inherit" }}
-                  height={30}
-                  width={30}
-                  src={ticketImage.src}
-                  alt={"追·卡券"}
-                />
-                <span>x10 | 抽10次</span>
-              </Button>
-            </div>
-          </div>
-        </div>
+        <Banner />
       </div>
       <div className={"flex items-center p-6"}>
         <div className={"px-6"}>token</div>
