@@ -3,7 +3,7 @@ import ActionButton from "./ActionButton";
 
 export default function ApiDemo() {
   return (
-    <div className="h-full w-full flex-grow flex justify-center items-center">
+    <div className="h-full w-full flex-grow flex justify-center items-center text-white">
       <div className="p-8 bg-slate-900 rounded">
         <p className="text-2xl">API Demo Page</p>
         <p className="text-red-600">

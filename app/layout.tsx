@@ -1,8 +1,11 @@
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
-
+const HanYiQiHeiFont = localFont({
+  src: "../assets/HanYiQiHei-65Jian-Regular-2.ttf",
+  preload: true,
+  weight: "800",
+});
 export const metadata = {
   title: "Lai追求的16岁生日特别网站",
   description:
@@ -16,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className + " flex w-full h-full"}>
+      <body className={HanYiQiHeiFont.className + " flex w-full h-full"}>
         {children}
       </body>
     </html>
