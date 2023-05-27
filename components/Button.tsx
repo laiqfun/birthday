@@ -11,7 +11,17 @@ export default function Button({
 }) {
   return (
     <button
-      className="p-1 px-2 m-1 shadow border-transparent align-middle border-2 active:border-white bg-white text-gray-700  hover:bg-gray-100 hover:shadow-md active:shadow-lg active:bg-gray-200 duration-200 rounded-full text-sm disabled:opacity-60 disabled:pointer-events-none disabled:bg-gray-300"
+      className="
+      p-1 px-5 m-1 
+      
+      shadow 
+      border-transparent border-2 rounded-full
+      align-middle text-sm
+      active:border-white active:shadow-lg active:bg-gray-200
+      bg-white text-gray-700  
+      hover:bg-gray-100 hover:shadow-md 
+      duration-200 
+      disabled:opacity-60 disabled:pointer-events-none disabled:bg-gray-300"
       onClick={onClick}
       disabled={disabled}
     >

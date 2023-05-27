@@ -2,6 +2,7 @@
 import ticketImage from "@/assets/ticket.png";
 import Banner from "@/components/Banner";
 import Button from "@/components/Button";
+import CDKEYDialog from "@/components/CDKEYDialog";
 import Image from "next/image";
 import { useRef, useState } from "react";
 import { CSSTransition } from "react-transition-group";
@@ -9,6 +10,7 @@ import { CSSTransition } from "react-transition-group";
 export default function Home() {
   const [window_k, setWindow] = useState(0);
   const [window_ani, setWindowAni] = useState(false);
+  const [showCDKEYDialog, setShowCDKEYDialog] = useState(false);
 
   function closeWindow() {
     setWindowAni(false);
@@ -89,18 +91,14 @@ export default function Home() {
   }
   function nextCardAni() {
     setCardAni(card_k);
-
-  function nextCardAni() {
-    setCardAni(card_k)
   }
 
   const [card_k, setCard] = useState(0);
   const [card_ani_k, setCardAni] = useState(1);
   const cardRef = useRef(null);
-  const cardRef = useRef(null)
   const [card_show, showCard] = useState(false);
 
-  const [maxStar,setMaxStar] = useState(3);
+  const [maxStar, setMaxStar] = useState(3);
 
   return (
     <main className={"flex flex-col w-screen h-screen"}>
@@ -113,7 +111,7 @@ export default function Home() {
         <div className={"w-80 flex items-center"}>
           <div className={"flex-1"}></div>
           <div className={"px-1"}>
-            <Button onClick={() => openWindow(1)}>兑换码</Button>
+            <Button onClick={() => setShowCDKEYDialog(true)}>兑换码</Button>
           </div>
           <div className={"px-1"}>
             <div id={"ticket"}>
@@ -172,6 +170,10 @@ export default function Home() {
           ) : null}
         </>
       </CSSTransition>
+      <CDKEYDialog
+        isShow={showCDKEYDialog}
+        onClose={() => setShowCDKEYDialog(false)}
+      ></CDKEYDialog>
 
       {roll_cutscene ? (
         <div id={"roll"}>
@@ -187,30 +189,42 @@ export default function Home() {
           </CSSTransition>
         </div>
       ) : null}
-      {roll_cutscene ? <div id={"roll"}>
-        <div style={{display: card_show ? "" : "none"}}>
-          <div id={"curtain"} style={{background: "none"}} onClick={nextCard}></div>
-          <CSSTransition
-            in={card_k == card_ani_k}
-            nodeRef={cardRef}
-            timeout={300}
-            onExited={() => nextCardAni()}
-            classNames="roll-card"
-          >
-            <div id={"roll-card"} className={`star-${maxStar}`} ref={cardRef}>
-              {card_k == card_ani_k ? <div id={"roll-card-star"}>
-                {maxStar>=4?<span>⭐</span>:null}
-                <span>⭐</span>
-                {maxStar>=5?<span style={{fontSize:"50px"}}>⭐</span>:null}
-                <span>⭐</span>
-                <span>⭐</span>
-              </div> : null}
-              {card_k == card_ani_k ? <div id={"roll-card-effort"}></div> : null}
-            </div>
-          </CSSTransition>
+      {roll_cutscene ? (
+        <div id={"roll"}>
+          <div style={{ display: card_show ? "" : "none" }}>
+            <div
+              id={"curtain"}
+              style={{ background: "none" }}
+              onClick={nextCard}
+            ></div>
+            <CSSTransition
+              in={card_k == card_ani_k}
+              nodeRef={cardRef}
+              timeout={300}
+              onExited={() => nextCardAni()}
+              classNames="roll-card"
+            >
+              <div id={"roll-card"} className={`star-${maxStar}`} ref={cardRef}>
+                {card_k == card_ani_k ? (
+                  <div id={"roll-card-star"}>
+                    {maxStar >= 4 ? <span>⭐</span> : null}
+                    <span>⭐</span>
+                    {maxStar >= 5 ? (
+                      <span style={{ fontSize: "50px" }}>⭐</span>
+                    ) : null}
+                    <span>⭐</span>
+                    <span>⭐</span>
+                  </div>
+                ) : null}
+                {card_k == card_ani_k ? (
+                  <div id={"roll-card-effort"}></div>
+                ) : null}
+              </div>
+            </CSSTransition>
+          </div>
+          <div></div>
         </div>
-        <div></div>
-      </div> : null}
+      ) : null}
     </main>
   );
 }

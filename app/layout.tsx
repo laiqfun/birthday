@@ -4,7 +4,6 @@ import "./globals.css";
 const HanYiQiHeiFont = localFont({
   src: "../assets/HanYiQiHei-65Jian-Regular-2.ttf",
   preload: true,
-  weight: "800",
 });
 export const metadata = {
   title: "Lai追求的16岁生日特别网站",
