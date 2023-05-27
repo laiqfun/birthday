@@ -12,7 +12,7 @@ export default function Button({
   return (
     <button
       className="
-      p-1 px-3 m-1 
+      py-1 px-3 m-1 
       w-full sm:w-auto
       flex justify-center items-center
       shadow 

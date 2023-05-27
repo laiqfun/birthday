@@ -3,13 +3,26 @@ import ticketImage from "@/assets/ticket.png";
 import Banner from "@/components/Banner";
 import Button from "@/components/Button";
 import CDKEYDialog from "@/components/CDKEYDialog";
+import GetTicketDialog from "@/components/GetTicketDialog";
+import PillLabel from "@/components/PillLabel";
 import { User } from "@prisma/client";
-import Image from "next/image";
 import { useState } from "react";
 
 export default function Home() {
   const [showCDKEYDialog, setShowCDKEYDialog] = useState(false);
+  const [showGetTicketDialog, setShowGetTicketDialog] = useState(false);
   const [user, setUser] = useState<User>();
+  function getTicket(k: number) {
+    setShowGetTicketDialog(false)
+    if(k==0){
+      //创建账号
+    }else if(k==1){
+      //使用兑换码
+    }else{
+      //答题
+      alert("答题八成要鸽")
+    }
+  }
 
   return (
     <main className={"flex flex-col w-screen h-screen"}>
@@ -26,13 +39,11 @@ export default function Home() {
             <Button onClick={() => setShowCDKEYDialog(true)}>兑换码</Button>
           </div>
           <div className={"px-1"}>
-            <div id={"ticket"}>
-              <div>
-                <Image fill src={ticketImage.src} alt={"追·卡券"} />
-              </div>
-              <span>7</span>
-              <button onClick={() => {}}>+</button>
-            </div>
+            <PillLabel
+              icon={ticketImage.src}
+              alt="『追·卡券』"
+              onClick={() => setShowGetTicketDialog(true)}
+            />
           </div>
         </div>
       </div>
@@ -51,6 +62,11 @@ export default function Home() {
         isShow={showCDKEYDialog}
         onClose={() => setShowCDKEYDialog(false)}
       ></CDKEYDialog>
+      <GetTicketDialog
+        isShow={showGetTicketDialog}
+        onClose={() => setShowGetTicketDialog(false)}
+        onClick={getTicket}
+      ></GetTicketDialog>
     </main>
   );
 }

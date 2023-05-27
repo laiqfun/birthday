@@ -12,8 +12,10 @@ export default function Banner() {
   const rootRef = createRef<HTMLDivElement>();
   const buttonGroupRef = createRef<HTMLDivElement>();
   const [buttonDisabled, setButtonDisabled] = useState(false);
-  function roll(times: number) {
+  const [rollStart, setRollStart] = useState(false);
+  function roll(times: 1|10) {
     setButtonDisabled(true);
+    setRollStart(true)
   }
   useLayoutEffect(() => {
     const gsapCtx = gsap.context(() => {
@@ -34,6 +36,7 @@ export default function Banner() {
       };
     }, rootRef);
   }, []);
+  
   return (
     <div
       className="w-5/6 md:max-w-3xl h-96 md:mx-12  max-w-full mx-0 relative bg-cover rounded-md shadow-md opacity-0"
@@ -41,7 +44,7 @@ export default function Banner() {
       ref={rootRef}
     >
       <div>
-        <div id={"banner-hero"} className={"absolute"}>
+        <div className={"absolute"}>
           <Image width={100} height={100} src={heroImage.src} alt={"五星"} />
         </div>
       </div>
