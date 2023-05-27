@@ -35,16 +35,16 @@ export default function Dialog({
         containerRef.current,
         isShow
           ? {
-              y: 0,
+              scale:1,
               opacity: 1,
               ease: "power4",
-              duration: 0.5,
+              duration: 0.3,
             }
           : {
-              y: 50,
+              scale:1.2,
               opacity: 0,
               ease: "power4",
-              duration: 0.5,
+              duration: 0.3,
             }
       );
     }, rootRef);
@@ -74,7 +74,7 @@ export default function Dialog({
       h-48
       max-w-lg
       bg-white
-      rounded-tl-lg rounded-br-lg
+      rounded-lg
       shadow-lg
       "
       >
@@ -83,14 +83,14 @@ export default function Dialog({
           <Image
             src={closeButton.src}
             width={20}
-            className="cursor-pointer hover:hue-rotate-30"
+            className="cursor-pointer duration-200 hover:opacity-50"
             alt={"关闭"}
             height={20}
             onClick={onClose}
           />
         </div>
         <div className="flex-1 p-4">{children}</div>
-        <div className="bg-gray-300 w-full h-12 items-center flex justify-center rounded-br-lg">
+        <div className="bg-gray-300 w-full h-12 items-center flex justify-center rounded-bl-lg rounded-br-lg">
           {buttons.map((v, i) => (
             <Button
               key={i}

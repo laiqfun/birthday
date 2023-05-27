@@ -15,9 +15,9 @@ export default function Input({
         value={value}
         onChange={(ev) => onChange(ev.target.value)}
         disabled={disabled}
-        className="border rounded-full duration-200 outline-gray-300 px-2 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="border rounded-full duration-200 outline-gray-300 px-3 py-2 disabled:opacity-50 disabled:cursor-not-allowed"
       ></input>
-      <p className="text-sm text-opacity-60 h-4 flex justify-center text-red-600">
+      <p className="text-sm text-opacity-60 p-2 text-center text-red-600">
         {hint}
       </p>
     </div>
