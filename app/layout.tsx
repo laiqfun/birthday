@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="zh">
+    <html lang="zh" className=" overflow-hidden">
       <body className={HanYiQiHeiFont.className + " flex w-full h-full"}>
         {children}
       </body>

@@ -35,13 +35,13 @@ export default function Dialog({
         containerRef.current,
         isShow
           ? {
-              scale:1,
+              scale: 1,
               opacity: 1,
               ease: "power4",
               duration: 0.3,
             }
           : {
-              scale:1.2,
+              scale: 1.2,
               opacity: 0,
               ease: "power4",
               duration: 0.3,
