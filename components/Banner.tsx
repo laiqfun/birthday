@@ -47,33 +47,38 @@ export default function Banner() {
       </div>
       <div
         className={
-          "absolute right-0 bottom-0 translate-y-5 flex items-center px-6 flex-col sm:flex-row w-full sm:w-auto"
+          "absolute -right-6 bottom-0 translate-y-5 flex items-center flex-col sm:flex-row w-full sm:w-auto"
         }
         ref={buttonGroupRef}
       >
-        <div className={"flex-1"}></div>
-        <div className={"px-3 sm:w-auto w-full flex"}>
+        <div className={"px-1 sm:w-auto w-full flex"}>
           <Button onClick={() => roll(1)} disabled={buttonDisabled}>
             <Image
               className="inline"
-              height={30}
-              width={30}
+              height={24}
+              width={24}
               src={ticketImage.src}
               alt={"追·卡券"}
             />
-            <span>x1 | 抽1次</span>
+            <span>
+              x1 <span className={"text-gray-400 text-lg"}>|</span>{" "}
+              <span className="mx-3">抽1次</span>{" "}
+            </span>
           </Button>
         </div>
-        <div className={"px-3 sm:w-auto w-full flex"}>
+        <div className={"px-1 sm:w-auto w-full flex"}>
           <Button onClick={() => roll(10)} disabled={buttonDisabled}>
             <Image
               className="inline"
-              height={30}
-              width={30}
+              height={24}
+              width={24}
               src={ticketImage.src}
               alt={"追·卡券"}
             />
-            <span>x10 | 抽10次</span>
+            <span>
+              x10 <span className={"text-gray-400 text-lg"}>|</span>{" "}
+              <span className="mx-3">抽10次</span>{" "}
+            </span>
           </Button>
         </div>
       </div>
