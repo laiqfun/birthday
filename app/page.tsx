@@ -1,5 +1,6 @@
 "use client";
 import ticketImage from "@/assets/ticket.png";
+import Bag from "@/components/Bag";
 import Banner from "@/components/Banner";
 import Button from "@/components/Button";
 import CDKEYDialog from "@/components/CDKEYDialog";
@@ -11,6 +12,7 @@ import { useState } from "react";
 export default function Home() {
   const [showCDKEYDialog, setShowCDKEYDialog] = useState(false);
   const [showGetTicketDialog, setShowGetTicketDialog] = useState(false);
+  const [showBagDialog, setShowBagDialog] = useState(false);
   const [user, setUser] = useState<User>();
   function getTicket(k: number) {
     setShowGetTicketDialog(false)
@@ -54,7 +56,7 @@ export default function Home() {
         <div className={"px-6"}>token</div>
         <div className={"flex-1"}></div>
         <div className={"px-6"}>
-          <div id={"bag"}>背包</div>
+          <div className={"cursor-pointer"} onClick={()=>setShowBagDialog(true)}>背包</div>
         </div>
       </div>
 
@@ -67,6 +69,7 @@ export default function Home() {
         onClose={() => setShowGetTicketDialog(false)}
         onClick={getTicket}
       ></GetTicketDialog>
+      <Bag isShow={showBagDialog} onClose={()=>setShowBagDialog(false)}></Bag>
     </main>
   );
 }
