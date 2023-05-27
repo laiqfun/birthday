@@ -46,23 +46,43 @@ export default function Home() {
   ]
   const windowRef = useRef(null);
 
+  function initRollCutscene() {
+    setCard(0)
+    setCardAni(1)
+    showCard(false)
+  }
+
   function roll(times: 1 | 10) {
+    initRollCutscene()
     setRollCutscene(true);
+    setTimeout(() => {
+      showCard(true);
+      setCard(1)
+    }, 2000)
   }
 
   const [roll_cutscene, setRollCutscene] = useState(false)
 
   function nextCard() {
-    if(card_k>=6)console.log("没了！")
-    else setCard(card_k + 1);
+    if (card_k >= 6) {
+      console.log("没了！");
+      setRollCutscene(false)
+    } else {
+      setMaxStar(Math.random()>0.5?3:Math.random()>0.5?4:5)
+      setCard(card_ani_k + 1)
+    }
   }
-  function nextCardAni(){
+
+  function nextCardAni() {
     setCardAni(card_k)
   }
 
   const [card_k, setCard] = useState(0);
   const [card_ani_k, setCardAni] = useState(1);
   const cardRef = useRef(null)
+  const [card_show, showCard] = useState(false);
+
+  const [maxStar,setMaxStar] = useState(3);
 
   return (
     <main className={"flex flex-col w-screen h-screen"}>
@@ -136,16 +156,28 @@ export default function Home() {
       </CSSTransition>
 
       {roll_cutscene ? <div id={"roll"}>
-        <div id={"curtain"} onClick={nextCard}></div>
-        <CSSTransition
-          in={card_k == card_ani_k}
-          nodeRef={cardRef}
-          timeout={200}
-          onExited={() => nextCardAni()}
-          classNames="roll-card"
-        >
-          <div id={"roll-card"} ref={cardRef}></div>
-        </CSSTransition>
+        <div style={{display: card_show ? "" : "none"}}>
+          <div id={"curtain"} style={{background: "none"}} onClick={nextCard}></div>
+          <CSSTransition
+            in={card_k == card_ani_k}
+            nodeRef={cardRef}
+            timeout={300}
+            onExited={() => nextCardAni()}
+            classNames="roll-card"
+          >
+            <div id={"roll-card"} className={`star-${maxStar}`} ref={cardRef}>
+              {card_k == card_ani_k ? <div id={"roll-card-star"}>
+                {maxStar>=4?<span>⭐</span>:null}
+                <span>⭐</span>
+                {maxStar>=5?<span style={{fontSize:"50px"}}>⭐</span>:null}
+                <span>⭐</span>
+                <span>⭐</span>
+              </div> : null}
+              {card_k == card_ani_k ? <div id={"roll-card-effort"}></div> : null}
+            </div>
+          </CSSTransition>
+        </div>
+        <div></div>
       </div> : null}
     </main>
   )
