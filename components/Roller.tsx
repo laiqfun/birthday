@@ -16,7 +16,7 @@ export default function Roller({
 }) {
   const cardRef = createRef<HTMLDivElement>();
   const cardInfoRef = createRef<HTMLDivElement>();
-  const starRef = createRef<HTMLDivElement>();
+  // const starRef = createRef<HTMLDivElement>();
   const bigStarRef = createRef<HTMLDivElement>();
   const [cardKey, setCardKey] = useState(0);
   const [showList, setShowList] = useState(false);
@@ -39,35 +39,62 @@ export default function Roller({
     setPlaying(true);
     console.log(cardKey, items);
     if (items[cardKey].star >= 5) {
-      tl.fromTo(
-        starRef.current,
-        {
-          display: "flex",
+      tl
+        .to(".star", {
           opacity: 0,
-          y: 100,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-        }
-      )
-        .fromTo(
-          bigStarRef.current,
+          y:100,
+          delay:-0.1,
+          duration:0.1
+        })
+        .to(
+          "#star-1",
           {
-            y: 80,
-          },
+            y: 0,
+            opacity: 1,
+            duration:0.5,
+            ease: "power4.out"
+          }
+        )
+        .to(
+          "#star-4",
+          {
+            y: 0,
+            delay: -0.4,
+            opacity: 1,
+            duration:0.5,
+            ease: "power4.out"
+          }
+        )
+        .to(
+          "#star-3",
+          {
+            y: 0,
+            opacity: 1,
+            delay:-0.4,
+            duration:0.5,
+            ease: "power4.out"
+          }
+        )
+        .to(
+          "#star-2",
+          {
+            y: 0,
+            delay: -0.4,
+            opacity: 1,
+            duration:0.5,
+            ease: "power4.out"
+          }
+        )
+        .to(
+          bigStarRef.current,
           {
             y: 0,
             delay: -0.3,
+            opacity: 1,
+            duration:0.6,
+            ease: "power4.out",
           }
         )
-        .to(starRef.current, {
-          opacity: 0,
-          scale: 0.5,
-          delay: 1,
-        })
-        .to(starRef.current, { display: "none", duration: 0.01 })
         .fromTo(
           cardRef.current,
           {
@@ -137,20 +164,36 @@ export default function Roller({
       ) : (
         <div onClick={(e) => e.stopPropagation()}>
           <div
-            ref={starRef}
+            // ref={starRef}
             className={
-              "absolute inset-0 z-50 hidden items-center justify-center"
+              "absolute inset-0 z-50 items-center justify-center"
             }
+            style={{display:playing?"flex":"none"}}
           >
-            <Image src={starImage.src} width={50} height={50} alt={"star"} />
-            <Image src={starImage.src} width={50} height={50} alt={"star"} />
-            <div ref={bigStarRef} className={"flex"}>
+            <Image
+              id={"star-1"}
+              src={starImage.src}
+              width={50}
+              height={50}
+              alt={"star"}
+              className="star"
+            />
+            <Image
+              id={"star-2"}
+              src={starImage.src}
+              width={50}
+              height={50}
+              alt={"star"}
+              className="star"
+            />
+            <div ref={bigStarRef} className={"flex star"}>
               {items[cardKey].star >= 5 ? (
                 <Image
                   src={starImage.src}
                   width={80}
                   height={80}
                   alt={"bigStar"}
+                  className="star"
                 />
               ) : null}
               {items[cardKey].star >= 6 ? (
@@ -159,12 +202,27 @@ export default function Roller({
                   width={80}
                   height={80}
                   alt={"bigStar"}
+                  className="star"
                 />
               ) : null}
             </div>
-            <Image src={starImage.src} width={50} height={50} alt={"star"} />
+            <Image
+              id={"star-3"}
+              src={starImage.src}
+              width={50}
+              height={50}
+              alt={"star"}
+              className="star"
+            />
             {items[cardKey].star >= 4 ? (
-              <Image src={starImage.src} width={50} height={50} alt={"star"} />
+              <Image
+                id={"star-4"}
+                src={starImage.src}
+                width={50}
+                height={50}
+                alt={"star"}
+                className="star"
+              />
             ) : null}
           </div>
           <div

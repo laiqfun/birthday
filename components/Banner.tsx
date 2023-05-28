@@ -86,7 +86,7 @@ export default function Banner() {
           </Button>
         </div>
       </div>
-      {rollStart?<Roller items={[{name:"Test",star:3,image_src:ticketImage.src},{name:"Test2",star:4,image_src:ticketImage.src},{name:"Test5",star:5,image_src:ticketImage.src},{name:"Test6",star:6,image_src:ticketImage.src}]} onClose={()=>setRollStart(false)} />:null}
+      {rollStart?<Roller items={[{name:"Test",star:6,image_src:ticketImage.src},{name:"Test2",star:6,image_src:ticketImage.src},{name:"Test5",star:5,image_src:ticketImage.src},{name:"Test6",star:6,image_src:ticketImage.src}]} onClose={()=>setRollStart(false)} />:null}
     </div>
   );
 }
