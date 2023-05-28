@@ -7,6 +7,7 @@ import { createRef, useLayoutEffect, useState } from "react";
 import backgroundImage from "../assets/bg.png";
 import heroImage from "../assets/hero.png";
 import Button from "./Button";
+import Roller from "./Roller";
 
 export default function Banner() {
   const rootRef = createRef<HTMLDivElement>();
@@ -85,6 +86,7 @@ export default function Banner() {
           </Button>
         </div>
       </div>
+      {rollStart?<Roller items={[{name:"Test",star:3,image_src:ticketImage.src}]} onClose={()=>setRollStart(false)} />:null}
     </div>
   );
 }
