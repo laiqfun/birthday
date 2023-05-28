@@ -12,10 +12,10 @@ import Roller from "./Roller";
 export default function Banner() {
   const rootRef = createRef<HTMLDivElement>();
   const buttonGroupRef = createRef<HTMLDivElement>();
-  const [buttonDisabled, setButtonDisabled] = useState(false);
+  // const [buttonDisabled, setButtonDisabled] = useState(false);
   const [rollStart, setRollStart] = useState(false);
   function roll(times: 1|10) {
-    setButtonDisabled(true);
+    // setButtonDisabled(true);
     setRollStart(true)
   }
   useLayoutEffect(() => {
@@ -56,7 +56,7 @@ export default function Banner() {
         ref={buttonGroupRef}
       >
         <div className={"px-1 sm:w-auto w-full flex"}>
-          <Button onClick={() => roll(1)} disabled={buttonDisabled}>
+          <Button onClick={() => roll(1)} disabled={rollStart}>
             <Image
               className="inline"
               height={24}
@@ -71,7 +71,7 @@ export default function Banner() {
           </Button>
         </div>
         <div className={"px-1 sm:w-auto w-full flex"}>
-          <Button onClick={() => roll(10)} disabled={buttonDisabled}>
+          <Button onClick={() => roll(10)} disabled={rollStart}>
             <Image
               className="inline"
               height={24}
@@ -86,7 +86,7 @@ export default function Banner() {
           </Button>
         </div>
       </div>
-      {rollStart?<Roller items={[{name:"Test",star:3,image_src:ticketImage.src}]} onClose={()=>setRollStart(false)} />:null}
+      {rollStart?<Roller items={[{name:"Test",star:3,image_src:ticketImage.src},{name:"Test2",star:4,image_src:ticketImage.src},{name:"Test5",star:5,image_src:ticketImage.src},{name:"Test6",star:6,image_src:ticketImage.src}]} onClose={()=>setRollStart(false)} />:null}
     </div>
   );
 }
