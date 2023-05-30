@@ -21,81 +21,81 @@ export default function Roller({
   const [cardKey, setCardKey] = useState(0);
   const [showList, setShowList] = useState(false);
   const [playing, setPlaying] = useState(false);
-  const tl = gsap.timeline();
+
   useLayoutEffect(() => {
-    playCardAni();
-  }, []);
-  function nextCard() {
-    if (playing) return;
-    if (cardKey + 1 >= items.length) {
-      setShowList(true);
-    } else {
-      setCardKey(cardKey + 1);
-      console.log(cardKey);
-      playCardAni();
-    }
-  }
-  function playCardAni() {
-    setPlaying(true);
-    console.log(cardKey, items);
-    if (items[cardKey].star >= 5) {
-      tl
-        .to(".star", {
+    const tl = gsap.timeline();
+    function playCardAni() {
+      setPlaying(true);
+      console.log(cardKey, items);
+      if (items[cardKey].star >= 5) {
+        tl.to(".star", {
           opacity: 0,
-          y:100,
-          delay:-0.1,
-          duration:0.1
+          y: 100,
+          delay: -0.1,
+          duration: 0.1,
         })
-        .to(
-          "#star-1",
-          {
+          .to("#star-1", {
             y: 0,
             opacity: 1,
-            duration:0.5,
-            ease: "power4.out"
-          }
-        )
-        .to(
-          "#star-4",
-          {
+            duration: 0.5,
+            ease: "power4.out",
+          })
+          .to("#star-4", {
             y: 0,
             delay: -0.4,
             opacity: 1,
-            duration:0.5,
-            ease: "power4.out"
-          }
-        )
-        .to(
-          "#star-3",
-          {
+            duration: 0.5,
+            ease: "power4.out",
+          })
+          .to("#star-3", {
             y: 0,
             opacity: 1,
-            delay:-0.4,
-            duration:0.5,
-            ease: "power4.out"
-          }
-        )
-        .to(
-          "#star-2",
-          {
+            delay: -0.4,
+            duration: 0.5,
+            ease: "power4.out",
+          })
+          .to("#star-2", {
             y: 0,
             delay: -0.4,
             opacity: 1,
-            duration:0.5,
-            ease: "power4.out"
-          }
-        )
-        .to(
-          bigStarRef.current,
-          {
+            duration: 0.5,
+            ease: "power4.out",
+          })
+          .to(bigStarRef.current, {
             y: 0,
             delay: -0.3,
             opacity: 1,
-            duration:0.6,
+            duration: 0.6,
             ease: "power4.out",
-          }
-        )
-        .fromTo(
+          })
+          .fromTo(
+            cardRef.current,
+            {
+              opacity: 0,
+              scale: 6,
+            },
+            {
+              opacity: 1,
+              scale: 1,
+              ease: "expo.out",
+            }
+          )
+          .fromTo(
+            cardInfoRef.current,
+            {
+              x: "40%",
+              opacity: 0,
+            },
+            {
+              x: 0,
+              opacity: 1,
+            }
+          )
+          .then(() => {
+            setPlaying(false);
+          });
+      } else {
+        tl.fromTo(
           cardRef.current,
           {
             opacity: 0,
@@ -107,47 +107,34 @@ export default function Roller({
             ease: "expo.out",
           }
         )
-        .fromTo(
-          cardInfoRef.current,
-          {
-            x: "40%",
-            opacity: 0,
-          },
-          {
-            x: 0,
-            opacity: 1,
-          }
-        )
-        .then(() => {
-          setPlaying(false);
-        });
+          .fromTo(
+            cardInfoRef.current,
+            {
+              x: "40%",
+              opacity: 0,
+            },
+            {
+              x: 0,
+              opacity: 1,
+            }
+          )
+          .then(() => {
+            setPlaying(false);
+          });
+      }
+    }
+
+    playCardAni();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cardKey]);
+
+  function nextCard() {
+    if (playing) return;
+    if (cardKey + 1 >= items.length) {
+      setShowList(true);
     } else {
-      tl.fromTo(
-        cardRef.current,
-        {
-          opacity: 0,
-          scale: 6,
-        },
-        {
-          opacity: 1,
-          scale: 1,
-          ease: "expo.out",
-        }
-      )
-        .fromTo(
-          cardInfoRef.current,
-          {
-            x: "40%",
-            opacity: 0,
-          },
-          {
-            x: 0,
-            opacity: 1,
-          }
-        )
-        .then(() => {
-          setPlaying(false);
-        });
+      setCardKey(cardKey + 1);
+      console.log(cardKey);
     }
   }
   return createPortal(
@@ -165,10 +152,8 @@ export default function Roller({
         <div onClick={(e) => e.stopPropagation()}>
           <div
             // ref={starRef}
-            className={
-              "absolute inset-0 z-50 items-center justify-center"
-            }
-            style={{display:playing?"flex":"none"}}
+            className={"absolute inset-0 z-50 items-center justify-center"}
+            style={{ display: playing ? "flex" : "none" }}
           >
             <Image
               id={"star-1"}
