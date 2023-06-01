@@ -12,13 +12,16 @@ export default function GetTicketDialog({
 }) {
     const list=[
         {
-            text:"创建一个账号",
+            text:"充值",
         },
         {
             text:"使用兑换码",
         },
         {
             text:"答题",
+        },
+        {
+            text:"直接获得648张",
         },
     ]
   return (
