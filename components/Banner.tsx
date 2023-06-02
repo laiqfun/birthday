@@ -9,14 +9,52 @@ import heroImage from "../assets/hero.png";
 import Button from "./Button";
 import Roller from "./Roller";
 
+const data = [
+  [
+    "白色的『羽毛』",
+    "奇怪的『道具』",
+    "『密语』",
+    "(空)",
+    "请看↑",
+    "🕊这张卡被鸽子叼走了",
+    "其实什么也没有的",
+  ],
+  ["追求的小秘密", "追求的帅照", "追求的画"],
+  [
+    "『预告：《追求的深情告白》』",
+    "『预告：《归星》（追求16岁生日曲）』",
+    "『预告：《寻找过去的回忆》』",
+    "（歪掉了！）《追求的草稿艺术画集》",
+    "（歪掉了！）追求的未发布“小曲”",
+  ],
+];
 export default function Banner() {
   const rootRef = createRef<HTMLDivElement>();
   const buttonGroupRef = createRef<HTMLDivElement>();
   // const [buttonDisabled, setButtonDisabled] = useState(false);
   const [rollStart, setRollStart] = useState(false);
-  function roll(times: 1|10) {
+  function roll(times: 1 | 10) {
+    let s3 = Math.floor(Math.random() * data[0].length);
+    let s4 = Math.floor(Math.random() * data[1].length);
+    let s5 = Math.floor(Math.random() * data[2].length);
+    if (times == 1) {
+      setCardItems([{ name: data[0][s3], star: 3, image_src: heroImage.src }]);
+    }else{
+      setCardItems([
+        { name: data[2][s5], star: 5, image_src: heroImage.src },
+        { name: data[1][s4], star: 4, image_src: heroImage.src },
+        { name: data[0][0], star: 3, image_src: heroImage.src },
+        { name: data[0][1], star: 3, image_src: heroImage.src },
+        { name: data[0][2], star: 3, image_src: heroImage.src },
+        { name: data[0][3], star: 3, image_src: heroImage.src },
+        { name: data[0][4], star: 3, image_src: heroImage.src },
+        { name: data[0][5], star: 3, image_src: heroImage.src },
+        { name: data[0][6], star: 3, image_src: heroImage.src },
+        { name: data[1][1], star: 4, image_src: heroImage.src },
+      ]);
+    }
     // setButtonDisabled(true);
-    setRollStart(true)
+    setRollStart(true);
   }
   useLayoutEffect(() => {
     const gsapCtx = gsap.context(() => {
@@ -37,7 +75,9 @@ export default function Banner() {
       };
     }, rootRef);
   }, []);
-  
+  const [card_items, setCardItems] = useState([
+    { name: "Test", star: 3, image_src: heroImage.src },
+  ]);
   return (
     <div
       className="w-5/6 md:max-w-3xl h-96 md:mx-12  max-w-full mx-0 relative bg-cover rounded-md shadow-md opacity-0"
@@ -86,7 +126,9 @@ export default function Banner() {
           </Button>
         </div>
       </div>
-      {rollStart?<Roller items={[{name:"Test",star:6,image_src:ticketImage.src},{name:"Test2",star:6,image_src:ticketImage.src},{name:"Test5",star:5,image_src:ticketImage.src},{name:"Test6",star:6,image_src:ticketImage.src}]} onClose={()=>setRollStart(false)} />:null}
+      {rollStart ? (
+        <Roller items={card_items} onClose={() => setRollStart(false)} />
+      ) : null}
     </div>
   );
 }
