@@ -15,8 +15,8 @@ export default function List({
             className={
               "border my-1 px-1 py-2 cursor-pointer text-sm text-gray-600"
             }
-            onClick={()=>onClick(k)}
             key={k}
+            onClick={()=>onClick(k)}
           >
             {c.text}
           </div>
