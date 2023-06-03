@@ -1,10 +1,10 @@
-import localFont from "next/font/local";
+// import localFont from "next/font/local";
 import "./globals.css";
 
-const HanYiQiHeiFont = localFont({
-  src: "../assets/HanYiQiHei-65Jian-Regular-2.ttf",
-  preload: true,
-});
+// const HanYiQiHeiFont = localFont({
+//   src: "../assets/HanYiQiHei-65Jian-Regular-2.ttf",
+//   preload: true,
+// });
 export const metadata = {
   title: "Lai追求的16岁生日特别网站",
   description:
@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="zh" className=" overflow-hidden">
-      <body className={HanYiQiHeiFont.className + " flex w-full h-full"}>
+      <body className={"flex w-full h-full"}>
         {children}
       </body>
     </html>
