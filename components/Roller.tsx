@@ -134,6 +134,7 @@ export default function Roller({
       setShowList(true);
       alert("卡池被『神秘力量』影响了，导致画面奇怪（总之不关追求的事（￣︶￣）↗　）")
       alert("更多预告请关注Lai追求的QQ动态~")
+      onClose();
     } else {
       setCardKey(cardKey + 1);
       console.log(cardKey);
