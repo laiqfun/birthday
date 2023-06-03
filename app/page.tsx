@@ -19,7 +19,7 @@ export default function Home() {
   useEffect(()=>{
     setTimeout(()=>{
       setShowContent(true);
-    },2000)
+    },1000)
   })
 
   const [showCDKEYDialog, setShowCDKEYDialog] = useState(false);
